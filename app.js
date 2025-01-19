@@ -332,4 +332,33 @@ const mots = [
 
 // Sélectionner un mot pour jouer
 
-let motSelectionner = mots[math.floor(Math.random() * mots.length)];
+let motSelectionne = mots[Math.floor(Math.random() * mots.length)];
+
+//console.log(motSelectionne);
+
+const bonnesLettresArr = [""];
+const mauvaisesLettresArr = [""];
+
+//Afficher le mot caché.
+
+function afficherMot() {
+  motEL.innerHTML = ` 
+      ${motSelectionne
+        .split("")
+        .map(
+          (lettre) => `
+                <span class="lettre">
+                  ${bonnesLettresArr.includes(lettre) ? lettres : ""}
+                </span>
+            `
+        )
+        .join("")}
+
+  `;
+
+  const motinterne = motEL.innerText.replace();
+
+  console.log(motEL.innerText);
+}
+
+afficherMot();

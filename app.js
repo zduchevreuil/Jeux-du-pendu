@@ -435,7 +435,7 @@ window.addEventListener("keydown", (e) => {
 rejouerBtn.addEventListener("click", () => {
   //vidée les arrays
   bonnesLettresArr.splice(0);
-  mauvaisesLettres.splice(0);
+  mauvaisesLettresArr.splice(0);
 
   motSelectionne = mots[Math.floor(Math.random() * mots.length)];
 

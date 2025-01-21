@@ -337,8 +337,8 @@ let motSelectionne = mots[Math.floor(Math.random() * mots.length)];
 
 //console.log(motSelectionne);
 
-const bonnesLettresArr = [""];
-const mauvaisesLettresArr = [""];
+const bonnesLettresArr = [];
+const mauvaisesLettresArr = [];
 
 //Afficher le mot caché.
 
@@ -375,7 +375,23 @@ function updateMauvaiseLettresEL() {
      ${mauvaisesLettresArr.map((lettre) => `<span>${lettre}</span>`)}
   `;
   // afficher le bonhomme
+
+  figurePartie.forEach((partie, index) => {
+    const erreurs = mauvaisesLettresArr.length;
+
+    if (index < erreurs) {
+      partie.style.display = "block";
+    } else {
+      partie.style.display = "none";
+    }
+  });
+
   //Verifier si on a perdu
+
+  if (mauvaisesLettresArr.length === figurePartie.length) {
+    messageFinal.innerText = "Malheureusement, tu as perdu :(";
+    popup.style.display = "flex";
+  }
 }
 
 //afficher la notification
@@ -412,6 +428,22 @@ window.addEventListener("keydown", (e) => {
       }
     }
   }
+});
+
+// Rejouer et Redémarrer
+
+rejouerBtn.addEventListener("click", () => {
+  //vidée les arrays
+  bonnesLettresArr.splice(0);
+  mauvaisesLettres.splice(0);
+
+  motSelectionne = mots[Math.floor(Math.random() * mots.length)];
+
+  afficherMot();
+
+  updateMauvaiseLettresEL();
+
+  popup.style.display = "none";
 });
 
 afficherMot();

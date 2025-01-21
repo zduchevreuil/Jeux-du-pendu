@@ -35,12 +35,11 @@ H1 {
   stroke: #fff;
   stroke-width: 4px;
   stroke-linecap: round;
-
   fill: transparent;
 }
 
 .figure-partie {
-  /*display: none;*/
+  display: none;
 }
 
 .mauvaises-lettres-contenant {

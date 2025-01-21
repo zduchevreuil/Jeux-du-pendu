@@ -3,6 +3,7 @@ const mauvaisesLettres = document.getElementById("mauvaises-lettres");
 const rejouerBtn = document.getElementById("play-button");
 const popup = document.getElementById("popup-contenant");
 const notification = document.getElementById("notification-contenant");
+
 const messageFinal = document.getElementById("message-final");
 
 const figurePartie = document.querySelectorAll(".figure-partie");
@@ -348,7 +349,7 @@ function afficherMot() {
         .map(
           (lettre) => `
                 <span class="lettre">
-                  ${bonnesLettresArr.includes(lettre) ? lettres : ""}
+                  ${bonnesLettresArr.includes(lettre) ? lettre : ""}
                 </span>
             `
         )
@@ -356,9 +357,61 @@ function afficherMot() {
 
   `;
 
-  const motinterne = motEL.innerText.replace();
+  const motinterne = motEL.innerText.replace(/\n/g, "");
 
-  console.log(motEL.innerText);
+  console.log(motEL.innerText, motinterne);
+
+  if (motinterne === motSelectionne) {
+    messageFinal.innerText = "Bravo ! Tu as gagner";
+    popup.style.display = "flex";
+  }
 }
+
+//Mauvaises lettres
+
+function updateMauvaiseLettresEL() {
+  // afficher mauvaises lettres
+  mauvaisesLettres.innerHTML = `
+     ${mauvaisesLettresArr.map((lettre) => `<span>${lettre}</span>`)}
+  `;
+  // afficher le bonhomme
+  //Verifier si on a perdu
+}
+
+//afficher la notification
+
+function afficherNotification() {
+  notification.classList.add("afficher");
+  setInterval(() => {
+    notification.classList.remove("afficher");
+  }, 2000);
+}
+
+//Events listeners
+
+window.addEventListener("keydown", (e) => {
+  //console.log(e.keyCode);
+  if (e.keyCode >= 65 && e.keyCode <= 90) {
+    const lettre = e.key;
+    //console.log(lettre);
+    if (motSelectionne.includes(lettre)) {
+      if (!bonnesLettresArr.includes(lettre)) {
+        bonnesLettresArr.push(lettre);
+
+        afficherMot();
+      } else {
+        afficherNotification();
+      }
+    } else {
+      if (!mauvaisesLettresArr.includes(lettre)) {
+        mauvaisesLettresArr.push(lettre);
+
+        updateMauvaiseLettresEL();
+      } else {
+        afficherNotification();
+      }
+    }
+  }
+});
 
 afficherMot();

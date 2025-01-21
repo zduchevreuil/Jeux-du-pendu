@@ -121,10 +121,10 @@ H1 {
   border-radius: 10px 10px 0 0;
   padding: 15px 20px;
   position: absolute;
-  bottom: -80px;
-  transition: transform 0.3s ease-in-out;
+  bottom: -88px;
+  transition: transform ease-in-out;
 }
 
 .notification-contenant.afficher {
-  transform: translateY(-80px);
+  transform: translateY(-88px);
 }
